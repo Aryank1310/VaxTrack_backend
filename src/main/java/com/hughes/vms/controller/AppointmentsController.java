@@ -41,6 +41,6 @@ public class AppointmentsController {
 
     @RequestMapping(value = "/appointments/register", method = RequestMethod.POST)
     public Appointments registerAppointment(@RequestBody Appointments app) {
-        return appointmentService.scheduleAppointment(app.getPatientId(), app.getCenterId(), app.getVaccineId(), app.getAppointmentDate());
+        return appointmentService.scheduleAppointment(app.getPatientId(), app.getCenterId(), app.getAppointmentDate());
     }
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VaccinesRepository extends JpaRepository<Vaccines, Long> {
-
+	Vaccines findFirstByAssignedFalse();
 
 }
