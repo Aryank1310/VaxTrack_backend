@@ -3,6 +3,8 @@ package com.hughes.vms.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.hughes.vms.model.Patients;
 import com.hughes.vms.model.Vaccination_centers;
 import com.hughes.vms.repository.VaccinationCentersRepository;
 
@@ -34,6 +36,10 @@ public class VaccinationCentersService {
 
 	        return vcRepo.save(center);
 	    }
+	 
+	 public Vaccination_centers readByPhoneNumber(String phoneNumber) {
+			return vcRepo.findByPhoneNumber(phoneNumber);
+		}
 
 }
 
