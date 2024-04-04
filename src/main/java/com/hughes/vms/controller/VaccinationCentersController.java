@@ -1,5 +1,6 @@
 package com.hughes.vms.controller;
 
+import com.hughes.vms.model.Patients;
 import com.hughes.vms.model.Vaccination_centers;
 import com.hughes.vms.services.VaccinationCentersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class VaccinationCentersController {
     public Vaccination_centers registerVaccinationCenter(@RequestBody Vaccination_centers center) {
         return vcService.registerVaccinationCenter(center.getName(), center.getAddress(),
                 center.getPhoneNumber(), center.getPincode(), center.getState(), center.getDistrict(), center.getUsername(), center.getPassword());
+    }
+    
+    @RequestMapping(value = "/centers/phone/{phoneNumber}", method = RequestMethod.GET)
+    public Vaccination_centers readCenterByPhoneNo(@PathVariable String phoneNumber) {
+        return vcService.readByPhoneNumber(phoneNumber);
     }
 
 }

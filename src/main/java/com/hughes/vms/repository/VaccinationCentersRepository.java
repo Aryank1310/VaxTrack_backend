@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface VaccinationCentersRepository extends JpaRepository <Vaccination_centers, Integer>{
     List<Vaccination_centers> readByPincode(int pincode);
+    Vaccination_centers findByPhoneNumber(String phoneNumber);
 }
