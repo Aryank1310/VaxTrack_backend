@@ -42,4 +42,8 @@ public class PatientsController {
         return pService.registerPatient(patient.getFirstName(), patient.getLastName(), patient.getAddress(),
                 patient.getPhoneNumber(), patient.getEmail(), patient.getDob(), patient.getGender());
     }
+    @RequestMapping(value = "/patients/delete/{patientId}", method = RequestMethod.DELETE)
+    public void deletePatientById(@PathVariable Long patientId) {
+        pService.deletePatientById(patientId);
+    }
 }
