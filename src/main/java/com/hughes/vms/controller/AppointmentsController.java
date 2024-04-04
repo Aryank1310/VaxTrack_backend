@@ -43,4 +43,9 @@ public class AppointmentsController {
     public Appointments registerAppointment(@RequestBody Appointments app) {
         return appointmentService.scheduleAppointment(app.getPatientId(), app.getCenterId(), app.getVaccineId(), app.getAppointmentDate());
     }
+    @RequestMapping(value = "/appointments/updateStatus/{appointmentId}", method = RequestMethod.PUT)
+    public Appointments updateAppointmentStatus(@PathVariable int appointmentId, @RequestBody String status) {
+        return appointmentService.updateAppointmentStatus(appointmentId, status);
+    }
+
 }
