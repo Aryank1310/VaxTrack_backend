@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,5 +42,9 @@ public class PatientsController {
     public Patients registerPatient(@RequestBody Patients patient) {
         return pService.registerPatient(patient.getFirstName(), patient.getLastName(), patient.getAddress(),
                 patient.getPhoneNumber(), patient.getEmail(), patient.getDob(), patient.getGender());
+    }
+    @PutMapping("/update/{id}")
+    public Patients updatePatientDetails(@PathVariable Long id, @RequestBody Patients updatedPatient) {
+        return pService.updatePatientDetails(id, updatedPatient);
     }
 }
