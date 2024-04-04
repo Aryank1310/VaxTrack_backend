@@ -82,6 +82,14 @@ public class AppointmentsService {
     public List<Appointments> getAppointmentByCenterID(int centerID){
     	return appointmentRepository.findByCenterId(centerID);
     }
+    
+    public Appointments updateAppointmentStatus(int appointmentId, String status) {
+        Appointments appointment = appointmentRepository.findById(appointmentId)
+                .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + appointmentId));
+        appointment.setStatus(Appointments.Status.valueOf(status));
+        return appointmentRepository.save(appointment);
+    }
+
 
     
 
