@@ -41,6 +41,9 @@ public class PatientsService {
 	public Patients readByPhoneNumber(String phoneNumber) {
 		return pRepo.findByPhoneNumber(phoneNumber);
 	}
+	 public void deletePatientById(Long patientId) {
+	        pRepo.deleteById(patientId);
+	    }
 	
 	public Patients updatePatientDetails(Long id, Patients updatedPatient) {
         Patients existingPatient = pRepo.findById(id).orElse(null);
