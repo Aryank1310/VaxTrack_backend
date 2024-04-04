@@ -21,7 +21,7 @@ public class VaccinationCentersService {
 		return vcRepo.readByPincode(pincode);
 	}
 	 public Vaccination_centers registerVaccinationCenter(String name, String address, String phoneNumber,
-	            int pincode, String state, String district) {
+	            int pincode, String state, String district, String username, String password) {
 	        Vaccination_centers center = new Vaccination_centers();
 	        center.setName(name);
 	        center.setAddress(address);
@@ -29,6 +29,8 @@ public class VaccinationCentersService {
 	        center.setPincode(pincode);
 	        center.setState(state);
 	        center.setDistrict(district);
+	        center.setUsername(username);
+	        center.setPassword(password);
 
 	        return vcRepo.save(center);
 	    }
