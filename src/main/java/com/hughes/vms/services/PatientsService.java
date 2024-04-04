@@ -45,4 +45,21 @@ public class PatientsService {
 	        pRepo.deleteById(patientId);
 	    }
 	
+	public Patients updatePatientDetails(Long id, Patients updatedPatient) {
+        Patients existingPatient = pRepo.findById(id).orElse(null);
+        if (existingPatient != null) {
+            existingPatient.setFirstName(updatedPatient.getFirstName());
+            existingPatient.setLastName(updatedPatient.getLastName());
+            existingPatient.setDob(updatedPatient.getDob());
+            existingPatient.setGender(updatedPatient.getGender());
+            existingPatient.setAddress(updatedPatient.getAddress());
+            existingPatient.setEmail(updatedPatient.getEmail());
+            existingPatient.setPhoneNumber(updatedPatient.getPhoneNumber());
+            // Update other fields as needed
+            return pRepo.save(existingPatient);
+        } else {
+            return null; // or throw exception
+        }
+    }
+	
 }
