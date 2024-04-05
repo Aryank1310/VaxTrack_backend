@@ -29,7 +29,7 @@ public class VaccinationCentersController {
     @PostMapping("/centers/register")
     public Vaccination_centers registerVaccinationCenter(@RequestBody Vaccination_centers center) {
         return vcService.registerVaccinationCenter(center.getName(), center.getAddress(),
-                center.getPhoneNumber(), center.getPincode(), center.getState(), center.getDistrict(), center.getUsername(), center.getPassword());
+                center.getPhoneNumber(), center.getPincode(), center.getState(), center.getDistrict());
     }
     
     @RequestMapping(value = "/centers/phone/{phoneNumber}", method = RequestMethod.GET)
