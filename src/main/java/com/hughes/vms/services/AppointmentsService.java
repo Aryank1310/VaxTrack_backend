@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hughes.vms.model.Appointments;
+import com.hughes.vms.model.Appointments.Status;
 import com.hughes.vms.model.Patients;
 import com.hughes.vms.model.Vaccines;
 import com.hughes.vms.repository.AppointmentsRepository;
@@ -83,13 +84,13 @@ public class AppointmentsService {
     	return appointmentRepository.findByCenterId(centerID);
     }
     
-    public Appointments updateAppointmentStatus(int appointmentId, String status) {
+    public Appointments updateAppointmentStatus(int appointmentId, Status status) {
         Appointments appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + appointmentId));
-        appointment.setStatus(Appointments.Status.valueOf(status));
+        appointment.setStatus(status); 
         return appointmentRepository.save(appointment);
     }
-
+ 
 
     
 

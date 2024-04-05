@@ -7,13 +7,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hughes.vms.model.Appointments;
 import com.hughes.vms.services.AppointmentsService;
+import com.hughes.vms.model.Appointments;
+import com.hughes.vms.model.Appointments.Status;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
@@ -43,9 +48,10 @@ public class AppointmentsController {
     public Appointments registerAppointment(@RequestBody Appointments app) {
         return appointmentService.scheduleAppointment(app.getPatientId(), app.getCenterId(), app.getAppointmentDate());
     }
-    @RequestMapping(value = "/appointments/updateStatus/{appointmentId}", method = RequestMethod.PUT)
-    public Appointments updateAppointmentStatus(@PathVariable int appointmentId, @RequestBody String status) {
+    @PutMapping("/appointments/updateStatus/{appointmentId}")
+    public Appointments updateAppointmentStatus(@PathVariable int appointmentId, @RequestParam("status") Status status) {
         return appointmentService.updateAppointmentStatus(appointmentId, status);
     }
+
 
 }
