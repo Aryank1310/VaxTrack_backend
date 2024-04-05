@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +30,10 @@ public class VaccinationRecordsController {
     public Vaccination_records readVaccinationRecordByPhoneNumber(@PathVariable String phoneNumber) {
     	return vrService.readByPhoneNumber(phoneNumber)
     			.orElseThrow(() -> new RuntimeException("Record not found with Phone Number: " + phoneNumber));
+    }
+    @PostMapping("/record/add")
+    public Vaccination_records addVaccinationRecord(@RequestBody Vaccination_records vaccinationRecord) {
+        return vrService.addVaccinationRecord(vaccinationRecord);
     }
 
     // You can add more request mapping methods here as needed

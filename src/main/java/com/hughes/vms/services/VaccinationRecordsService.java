@@ -21,6 +21,9 @@ public class VaccinationRecordsService {
     public List<Vaccination_records> getVaccinationRecords() {
         return vrRepo.findAll();
     }
+    public Vaccination_records addVaccinationRecord(Vaccination_records vaccinationRecord) {
+        return vrRepo.save(vaccinationRecord);
+    }
     
     public Optional<Vaccination_records> readByPhoneNumber(String phoneNumber) {
     	Patients patient = patientsService.readByPhoneNumber(phoneNumber);
