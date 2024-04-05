@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hughes.vms.model.Appointments;
 import com.hughes.vms.services.AppointmentsService;
+import com.hughes.vms.services.VaccinationRecordsService;
 import com.hughes.vms.model.Appointments;
 import com.hughes.vms.model.Appointments.Status;
+import com.hughes.vms.model.Vaccination_records;
 
 @CrossOrigin("*")
 @RestController
@@ -25,6 +27,9 @@ import com.hughes.vms.model.Appointments.Status;
 public class AppointmentsController {
     @Autowired
     AppointmentsService appointmentService;
+    
+    @Autowired
+    VaccinationRecordsService vrecordservice;
 
     @RequestMapping(value="/appointments", method=RequestMethod.GET)
     public List<Appointments> readAppointments() {
@@ -50,8 +55,25 @@ public class AppointmentsController {
     }
     @PutMapping("/appointments/updateStatus/{appointmentId}")
     public Appointments updateAppointmentStatus(@PathVariable int appointmentId, @RequestParam("status") Status status) {
-        return appointmentService.updateAppointmentStatus(appointmentId, status);
+        Appointments updatedAppointment = appointmentService.updateAppointmentStatus(appointmentId, status);
+        
+        // Check if the status is completed
+        if (status == Status.Completed) {
+            // Create a new vaccination record
+            Vaccination_records vaccinationRecord = new Vaccination_records();
+            vaccinationRecord.setPatientId(updatedAppointment.getPatientId());
+            vaccinationRecord.setVaccineId(updatedAppointment.getVaccineId());
+            vaccinationRecord.setVaccinationDate(new java.sql.Timestamp(System.currentTimeMillis()));
+            // Convert centerId to Long before setting it
+            vaccinationRecord.setVaccinationCenterId(Long.valueOf(updatedAppointment.getCenterId()));
+            
+            // Add the vaccination record
+            vrecordservice.addVaccinationRecord(vaccinationRecord);
+        }
+
+        return updatedAppointment;
     }
+
 
 
 }
